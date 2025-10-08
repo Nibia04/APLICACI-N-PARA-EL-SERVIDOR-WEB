@@ -1,0 +1,1 @@
+export { HistorialCompra } from './HistorialCompra.js';

@@ -1,0 +1,1 @@
+export { Favorito } from './Favorito.js';
