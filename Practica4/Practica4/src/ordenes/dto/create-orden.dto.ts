@@ -1,0 +1,25 @@
+import { IsNotEmpty, IsOptional, IsString, IsNumber, Min, MaxLength } from 'class-validator';
+
+export class CreateOrdenDto {
+  @IsNotEmpty({ message: 'El número de orden es requerido' })
+  @IsString({ message: 'El número de orden debe ser una cadena de texto' })
+  numeroOrden: string;
+
+  @IsNotEmpty({ message: 'El total es requerido' })
+  @IsNumber({}, { message: 'El total debe ser un número' })
+  @Min(0, { message: 'El total debe ser mayor o igual a 0' })
+  total: number;
+
+  @IsOptional()
+  @IsString({ message: 'El estado debe ser una cadena de texto' })
+  @MaxLength(50, { message: 'El estado no puede exceder 50 caracteres' })
+  estado?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Las observaciones deben ser una cadena de texto' })
+  observaciones?: string;
+
+  @IsNotEmpty({ message: 'El ID del cliente es requerido' })
+  @IsNumber({}, { message: 'El ID del cliente debe ser un número' })
+  clienteId: number;
+}
