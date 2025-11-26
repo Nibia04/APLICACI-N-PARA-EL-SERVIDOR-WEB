@@ -1,0 +1,238 @@
+{
+    "ubicaciones": [
+        {
+            "id": "1",
+            "nombre": "Estadio El Campín",
+            "direccion": "Calle 26 #39-50",
+            "ciudad": "manta ",
+            "pais": "ecuador ",
+            "latitud": 4.7110,
+            "longitud": -74.0721,
+            "capacidad": 5000,
+            "descripcion": "holis "
+        },
+        {
+            "id": "2",
+            "nombre": "Parque Arvi",
+            "direccion": "Avenida El Poblado",
+            "ciudad": "Medellín",
+            "pais": "Colombia",
+            "latitud": 6.2048,
+            "longitud": -75.5445,
+            "capacidad": 3000,
+            "descripcion": "Parque con anfiteatro al aire libre"
+        },
+        {
+            "id": "3",
+            "nombre": "Coliseo Julio Mario Santo Domingo",
+            "direccion": "Carrera 62 #47a-97",
+            "ciudad": "Bogotá",
+            "pais": "Colombia",
+            "latitud": 4.7369,
+            "longitud": -74.0550,
+            "capacidad": 7000,
+            "descripcion": "Coliseo para conciertos y eventos especiales"
+        }
+    ],
+    "eventos": [
+        {
+            "id": "1",
+            "nombre": "Coldplay: Music of the Spheres",
+            "descripcion": "Gira mundial del álbum Music of the Spheres. Una experiencia visual y sonora única.",
+            "fecha": "2024-12-15",
+            "hora": "20:00",
+            "artista": "Coldplay",
+            "imagen": "https://example.com/coldplay.jpg",
+            "ubicacionId": "1",
+            "capacidadTotal": 5000,
+            "asientosDisponibles": 4500,
+            "precioBase": 150,
+            "estado": "activo"
+        },
+        {
+            "id": "2",
+            "nombre": "Bad Bunny: Nadie Sabe lo que va a Pasar Mañana",
+            "descripcion": "Concierto de Bad Bunny con presentación del nuevo álbum.",
+            "fecha": "2024-11-30",
+            "hora": "19:30",
+            "artista": "Bad Bunny",
+            "imagen": "https://example.com/badbunny.jpg",
+            "ubicacionId": "3",
+            "capacidadTotal": 7000,
+            "asientosDisponibles": 6200,
+            "precioBase": 120,
+            "estado": "activo"
+        },
+        {
+            "id": "3",
+            "nombre": "Karol G: Mañana Será Bonito",
+            "descripcion": "Gira sudamericana de Karol G con efectos especiales.",
+            "fecha": "2024-12-20",
+            "hora": "21:00",
+            "artista": "Karol G",
+            "imagen": "https://example.com/karolg.jpg",
+            "ubicacionId": "2",
+            "capacidadTotal": 3000,
+            "asientosDisponibles": 2800,
+            "precioBase": 100,
+            "estado": "activo"
+        }
+    ],
+    "tiposEntrada": [
+        {
+            "id": "1",
+            "eventoId": "1",
+            "nombre": "VIP Platea",
+            "descripcion": "Acceso VIP con beneficios premium",
+            "precioBase": 350,
+            "cantidad": 500,
+            "cantidadDisponible": 450,
+            "descuento": 0,
+            "beneficios": [
+                "Parking gratuito",
+                "Bar VIP",
+                "Merchandise exclusivo",
+                "Entrada prioritaria"
+            ]
+        },
+        {
+            "id": "2",
+            "eventoId": "1",
+            "nombre": "General",
+            "descripcion": "Entrada general con acceso a toda la zona",
+            "precioBase": 150,
+            "cantidad": 3500,
+            "cantidadDisponible": 3200,
+            "descuento": 0,
+            "beneficios": [
+                "Acceso general",
+                "Zona de ventas"
+            ]
+        },
+        {
+            "id": "3",
+            "eventoId": "1",
+            "nombre": "Galería",
+            "descripcion": "Asientos en zona superior",
+            "precioBase": 80,
+            "cantidad": 1000,
+            "cantidadDisponible": 850,
+            "descuento": 15,
+            "beneficios": [
+                "Acceso a zona alta"
+            ]
+        },
+        {
+            "id": "4",
+            "eventoId": "2",
+            "nombre": "VIP Premium",
+            "descripcion": "La mejor experiencia con acceso al área VIP privada",
+            "precioBase": 400,
+            "cantidad": 300,
+            "cantidadDisponible": 280,
+            "descuento": 0,
+            "beneficios": [
+                "Meet & Greet",
+                "Área VIP privada",
+                "Catering incluido",
+                "Fotógrafo oficial"
+            ]
+        },
+        {
+            "id": "5",
+            "eventoId": "2",
+            "nombre": "General",
+            "descripcion": "Entrada general",
+            "precioBase": 120,
+            "cantidad": 6000,
+            "cantidadDisponible": 5500,
+            "descuento": 0,
+            "beneficios": [
+                "Acceso general"
+            ]
+        }
+    ],
+    "asientos": [
+        {
+            "id": "1",
+            "eventoId": "1",
+            "fila": "A",
+            "numero": 1,
+            "tipoEntradaId": "1",
+            "estado": "disponible",
+            "precio": 350
+        },
+        {
+            "id": "2",
+            "eventoId": "1",
+            "fila": "A",
+            "numero": 2,
+            "tipoEntradaId": "1",
+            "estado": "disponible",
+            "precio": 350
+        },
+        {
+            "id": "3",
+            "eventoId": "1",
+            "fila": "A",
+            "numero": 3,
+            "tipoEntradaId": "2",
+            "estado": "disponible",
+            "precio": 150
+        },
+        {
+            "id": "4",
+            "eventoId": "1",
+            "fila": "B",
+            "numero": 1,
+            "tipoEntradaId": "2",
+            "estado": "disponible",
+            "precio": 150
+        },
+        {
+            "id": "5",
+            "eventoId": "1",
+            "fila": "C",
+            "numero": 1,
+            "tipoEntradaId": "3",
+            "estado": "disponible",
+            "precio": 80
+        }
+    ],
+    "compras": [
+        {
+            "id": "1",
+            "usuarioId": "user_001",
+            "eventoId": "1",
+            "asientosIds": [
+                "1",
+                "2"
+            ],
+            "tiposEntradaIds": [
+                "1"
+            ],
+            "precioTotal": 700,
+            "moneda": "COP",
+            "estado": "pagado",
+            "metodoPago": "tarjeta",
+            "referencias": "TRX-20241125-001",
+            "fechaPago": "2024-11-25T15:30:00Z"
+        },
+        {
+            "id": "2",
+            "usuarioId": "user_002",
+            "eventoId": "1",
+            "asientosIds": [
+                "3",
+                "4"
+            ],
+            "tiposEntradaIds": [
+                "2"
+            ],
+            "precioTotal": 300,
+            "moneda": "COP",
+            "estado": "pendiente",
+            "referencias": "REF-20241125-002"
+        }
+    ]
+}

@@ -1,0 +1,238 @@
+{
+    "info": {
+        "_postman_id": "rest-webhook-websocket",
+        "name": "REST → Webhook → WebSocket",
+        "description": "Flujo completo: REST API → Webhook → WebSocket",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Eventos",
+            "item": [
+                {
+                    "name": "1. Crear Evento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Concierto Metallica\",\n  \"artista\": \"Metallica\",\n  \"fecha\": \"2025-12-15\",\n  \"hora\": \"20:00\",\n  \"imagen\": null,\n  \"precioBase\": 150,\n  \"capacidadTotal\": 5000,\n  \"ubicacionId\": \"loc-001\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/eventos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2. Obtener todos los eventos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/eventos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Tipos Entrada",
+            "item": [
+                {
+                    "name": "Crear Tipo Entrada",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"General\",\n  \"descripcion\": \"Entrada General\",\n  \"precio\": 50,\n  \"cantidad\": 1000,\n  \"eventoId\": \"REEMPLAZA_CON_ID_EVENTO\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/tipos-entrada",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "tipos-entrada"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Ubicaciones",
+            "item": [
+                {
+                    "name": "Crear Ubicación",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Estadio Nacional\",\n  \"ciudad\": \"Santiago\",\n  \"pais\": \"Chile\",\n  \"latitud\": -33.45,\n  \"longitud\": -70.45,\n  \"capacidad\": 40000,\n  \"direccion\": \"Calle Principal 123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Asientos",
+            "item": [
+                {
+                    "name": "Crear Asiento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"fila\": \"A\",\n  \"numero\": 1,\n  \"precio\": 50,\n  \"eventoId\": \"REEMPLAZA_CON_ID_EVENTO\",\n  \"tipoEntradaId\": \"opcional\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/asientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Compras",
+            "item": [
+                {
+                    "name": "Crear Compra",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"usuarioId\": \"user-123\",\n  \"eventoId\": \"REEMPLAZA_CON_ID_EVENTO\",\n  \"metodoPago\": \"tarjeta_credito\",\n  \"asientoIds\": []\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/compras",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "WebSocket Health",
+            "item": [
+                {
+                    "name": "Health Check WebSocket",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3001/health",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "health"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Eventos Recibidos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3001/events/log",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "events",
+                                "log"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

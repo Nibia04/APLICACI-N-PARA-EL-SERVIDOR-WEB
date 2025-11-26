@@ -1,0 +1,296 @@
+{
+    "info": {
+        "_postman_id": "websocket-server",
+        "name": "WebSocket Server (Puerto 3001)",
+        "description": "Pruebas directas al servidor WebSocket",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health & Status",
+            "item": [
+                {
+                    "name": "1. Health Check",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3001/health",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica que el servidor WebSocket está corriendo"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "2. Ver Eventos Recibidos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3001/events/log",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "events",
+                                "log"
+                            ]
+                        },
+                        "description": "Lista todos los eventos que el WebSocket ha recibido del webhook"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "3. Ver Clientes Conectados",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3001/clients",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "clients"
+                            ]
+                        },
+                        "description": "Muestra los clientes WebSocket conectados"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Webhook Endpoint",
+            "item": [
+                {
+                    "name": "POST - Simular Webhook (Evento)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"nombre\": \"Concierto Metallica\",\n    \"artista\": \"Metallica\",\n    \"fecha\": \"2025-12-15\",\n    \"hora\": \"20:00\",\n    \"precioBase\": 150,\n    \"capacidadTotal\": 5000\n  },\n  \"timestamp\": \"2025-11-25T10:30:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula un webhook POST desde el REST API. Si el navegador está abierto en index.html, verás el evento en tiempo real"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST - Simular Webhook (Ubicación)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"ubicacion-456\",\n  \"tipo\": \"ubicaciones\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"nombre\": \"Estadio Nacional\",\n    \"ciudad\": \"Santiago\",\n    \"pais\": \"Chile\",\n    \"capacidad\": 40000,\n    \"direccion\": \"Calle Principal 123\"\n  },\n  \"timestamp\": \"2025-11-25T10:35:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula un webhook POST para una ubicación"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST - Simular Webhook (Asiento)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"asiento-789\",\n  \"tipo\": \"asientos\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"fila\": \"A\",\n    \"numero\": 1,\n    \"precio\": 50,\n    \"eventoId\": \"evento-123\"\n  },\n  \"timestamp\": \"2025-11-25T10:40:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula un webhook POST para un asiento"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST - Simular Webhook (Tipo Entrada)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"tipoentrada-321\",\n  \"tipo\": \"tipos-entrada\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"nombre\": \"General\",\n    \"descripcion\": \"Entrada General\",\n    \"precio\": 50,\n    \"cantidad\": 1000,\n    \"eventoId\": \"evento-123\"\n  },\n  \"timestamp\": \"2025-11-25T10:45:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula un webhook POST para un tipo de entrada"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST - Simular Webhook (Compra)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"compra-654\",\n  \"tipo\": \"compras\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"usuarioId\": \"user-123\",\n    \"eventoId\": \"evento-123\",\n    \"metodoPago\": \"tarjeta_credito\",\n    \"total\": 150,\n    \"asientoIds\": []\n  },\n  \"timestamp\": \"2025-11-25T10:50:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula un webhook POST para una compra"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Operaciones UPDATE y DELETE",
+            "item": [
+                {
+                    "name": "POST - Webhook UPDATE (Evento)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"UPDATE\",\n  \"datos\": {\n    \"nombre\": \"Concierto Metallica - ACTUALIZADO\",\n    \"artista\": \"Metallica\",\n    \"fecha\": \"2025-12-20\",\n    \"hora\": \"21:00\",\n    \"precioBase\": 200\n  },\n  \"timestamp\": \"2025-11-25T10:55:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula una actualización de evento"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST - Webhook DELETE (Evento)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"DELETE\",\n  \"datos\": null,\n  \"timestamp\": \"2025-11-25T11:00:00Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3001/webhook/evento",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "webhook",
+                                "evento"
+                            ]
+                        },
+                        "description": "Simula una eliminación de evento"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

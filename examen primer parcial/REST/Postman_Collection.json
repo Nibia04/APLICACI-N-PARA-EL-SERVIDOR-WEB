@@ -1,0 +1,688 @@
+{
+    "info": {
+        "name": "API Gestión de Eventos",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Eventos",
+            "item": [
+                {
+                    "name": "Crear Evento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Concierto Rock\",\n  \"artista\": \"The Beatles\",\n  \"fecha\": \"2024-12-31\",\n  \"hora\": \"20:00\",\n  \"imagen\": \"https://example.com/image.jpg\",\n  \"precioBase\": 150.00,\n  \"capacidadTotal\": 500,\n  \"ubicacionId\": \"550e8400-e29b-41d4-a716-446655440000\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/eventos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todos los Eventos",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Evento por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/550e8400-e29b-41d4-a716-446655440001",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "550e8400-e29b-41d4-a716-446655440001"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Próximos Eventos",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/proximos/lista",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "proximos",
+                                "lista"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eventos por Rango de Precio",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/precio/100/200",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "precio",
+                                "100",
+                                "200"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eventos por Artista",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/artista/Beatles",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "artista",
+                                "Beatles"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar Evento",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Concierto Rock - Edición Especial\",\n  \"precioBase\": 175.00\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/550e8400-e29b-41d4-a716-446655440001",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "550e8400-e29b-41d4-a716-446655440001"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Evento",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:3000/eventos/550e8400-e29b-41d4-a716-446655440001",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "eventos",
+                                "550e8400-e29b-41d4-a716-446655440001"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Ubicaciones",
+            "item": [
+                {
+                    "name": "Crear Ubicación",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Estadio Nacional\",\n  \"ciudad\": \"Santiago\",\n  \"pais\": \"Chile\",\n  \"latitud\": -33.4489,\n  \"longitud\": -70.6693,\n  \"capacidad\": 48000,\n  \"direccion\": \"Avenida Marathon 7000, Ñuñoa\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todas las Ubicaciones",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Ubicaciones por Ciudad",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones/ciudad/Santiago",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones",
+                                "ciudad",
+                                "Santiago"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Ubicaciones por Capacidad Mínima",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones/capacidad/30000",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones",
+                                "capacidad",
+                                "30000"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Ubicaciones Cercanas",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/ubicaciones/cercanas/-33.4489/-70.6693/5",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "ubicaciones",
+                                "cercanas",
+                                "-33.4489",
+                                "-70.6693",
+                                "5"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Asientos",
+            "item": [
+                {
+                    "name": "Crear Asiento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"fila\": \"A\",\n  \"numero\": 1,\n  \"precio\": 150.00,\n  \"eventoId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"tipoEntradaId\": \"550e8400-e29b-41d4-a716-446655440010\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/asientos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Asientos Disponibles por Evento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/asientos/evento/550e8400-e29b-41d4-a716-446655440000/disponibles",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos",
+                                "evento",
+                                "550e8400-e29b-41d4-a716-446655440000",
+                                "disponibles"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Asientos por Fila",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/asientos/fila/A",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos",
+                                "fila",
+                                "A"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Reservar Asiento",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3000/asientos/550e8400-e29b-41d4-a716-446655440020/reservar",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos",
+                                "550e8400-e29b-41d4-a716-446655440020",
+                                "reservar"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Ocupar Asiento",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3000/asientos/550e8400-e29b-41d4-a716-446655440020/ocupar",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "asientos",
+                                "550e8400-e29b-41d4-a716-446655440020",
+                                "ocupar"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Tipos de Entrada",
+            "item": [
+                {
+                    "name": "Crear Tipo de Entrada",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"VIP\",\n  \"precioBase\": 250.00,\n  \"cantidad\": 100,\n  \"eventoId\": \"550e8400-e29b-41d4-a716-446655440000\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/tipos-entrada",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "tipos-entrada"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Tipos de Entrada por Evento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/tipos-entrada/evento/550e8400-e29b-41d4-a716-446655440000",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "tipos-entrada",
+                                "evento",
+                                "550e8400-e29b-41d4-a716-446655440000"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Tipos Disponibles con Stock",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/tipos-entrada/disponibles/stock",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "tipos-entrada",
+                                "disponibles",
+                                "stock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Reducir Stock",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"cantidad\": 5\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/tipos-entrada/550e8400-e29b-41d4-a716-446655440010/reducir-stock",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "tipos-entrada",
+                                "550e8400-e29b-41d4-a716-446655440010",
+                                "reducir-stock"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Compras",
+            "item": [
+                {
+                    "name": "Crear Compra",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"usuarioId\": \"550e8400-e29b-41d4-a716-446655440100\",\n  \"metodoPago\": \"TARJETA\",\n  \"asientoIds\": [\"550e8400-e29b-41d4-a716-446655440020\", \"550e8400-e29b-41d4-a716-446655440021\"],\n  \"eventoId\": \"550e8400-e29b-41d4-a716-446655440000\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/compras",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Obtener Todas las Compras",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/compras",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Compras por Usuario",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/usuario/550e8400-e29b-41d4-a716-446655440100",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "usuario",
+                                "550e8400-e29b-41d4-a716-446655440100"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Compras por Evento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/evento/550e8400-e29b-41d4-a716-446655440000",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "evento",
+                                "550e8400-e29b-41d4-a716-446655440000"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Compras Pendientes",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/estado/pendientes",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "estado",
+                                "pendientes"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Procesar Pago",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"numeroTransaccion\": \"TRX-2024-001\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/compras/550e8400-e29b-41d4-a716-446655440200/procesar-pago",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "550e8400-e29b-41d4-a716-446655440200",
+                                "procesar-pago"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Confirmar Compra",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/550e8400-e29b-41d4-a716-446655440200/confirmar",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "550e8400-e29b-41d4-a716-446655440200",
+                                "confirmar"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Cancelar Compra",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/550e8400-e29b-41d4-a716-446655440200/cancelar",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "550e8400-e29b-41d4-a716-446655440200",
+                                "cancelar"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Ventas Totales por Evento",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3000/compras/evento/550e8400-e29b-41d4-a716-446655440000/ventas-totales",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "compras",
+                                "evento",
+                                "550e8400-e29b-41d4-a716-446655440000",
+                                "ventas-totales"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

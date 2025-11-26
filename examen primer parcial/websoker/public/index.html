@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time WebSocket Events</title>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .status-dot.connected {
+            background: #10b981;
+        }
+
+        .status-dot.disconnected {
+            background: #ef4444;
+            animation: none;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.3s ease-out;
+            border-left: 5px solid;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-card.eventos {
+            border-left-color: #f59e0b;
+        }
+
+        .event-card.ubicaciones {
+            border-left-color: #3b82f6;
+        }
+
+        .event-card.asientos {
+            border-left-color: #8b5cf6;
+        }
+
+        .event-card.tipos-entrada {
+            border-left-color: #eab308;
+        }
+
+        .event-card.compras {
+            border-left-color: #ef4444;
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .event-type {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .operation-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .operation-badge.CREATE {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .operation-badge.UPDATE {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .operation-badge.DELETE {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .event-id {
+            color: #666;
+            font-size: 12px;
+            word-break: break-all;
+            margin-bottom: 10px;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .event-data {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .event-data pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .event-timestamp {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            background: white;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Real-time WebSocket Event Monitor</h1>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="status-dot connected" id="statusDot"></div>
+                    <span id="statusText">Conectando...</span>
+                </div>
+                <div class="status-item">
+                    Cliente ID: <code id="clientId">-</code>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalEvents">0</div>
+                    <div class="stat-label">Total Eventos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="createCount">0</div>
+                    <div class="stat-label">Creaciones</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="updateCount">0</div>
+                    <div class="stat-label">Actualizaciones</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="deleteCount">0</div>
+                    <div class="stat-label">Eliminaciones</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="eventos">🟠 Eventos</button>
+            <button class="filter-btn" data-filter="ubicaciones">🔵 Ubicaciones</button>
+            <button class="filter-btn" data-filter="asientos">🟣 Asientos</button>
+            <button class="filter-btn" data-filter="tipos-entrada">🟡 Tipos Entrada</button>
+            <button class="filter-btn" data-filter="compras">🔴 Compras</button>
+        </div>
+
+        <div class="events-container" id="eventsContainer">
+            <div class="no-events">
+                <h2>⏳ Esperando eventos...</h2>
+                <p>Los eventos aparecerán aquí cuando se disparen desde el REST API</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Conectar al servidor WebSocket
+        const socket = io();
+        let events = [];
+        let currentFilter = 'all';
+
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const clientIdElement = document.getElementById('clientId');
+        const eventsContainer = document.getElementById('eventsContainer');
+        const totalEventsElement = document.getElementById('totalEvents');
+        const createCountElement = document.getElementById('createCount');
+        const updateCountElement = document.getElementById('updateCount');
+        const deleteCountElement = document.getElementById('deleteCount');
+
+        // Eventos de conexión
+        socket.on('connect', () => {
+            statusDot.classList.remove('disconnected');
+            statusDot.classList.add('connected');
+            statusText.textContent = '✅ Conectado';
+            clientIdElement.textContent = socket.id;
+            console.log('✅ Conectado al WebSocket:', socket.id);
+        });
+
+        socket.on('disconnect', () => {
+            statusDot.classList.remove('connected');
+            statusDot.classList.add('disconnected');
+            statusText.textContent = '❌ Desconectado';
+            console.log('❌ Desconectado del WebSocket');
+        });
+
+        // Escuchar eventos del servidor
+        socket.on('evento:nuevo', (evento) => {
+            console.log('📥 Evento recibido:', evento);
+            events.unshift(evento);
+            renderEvents();
+            updateStats();
+        });
+
+        // Renderizar eventos
+        function renderEvents() {
+            const filteredEvents = currentFilter === 'all'
+                ? events
+                : events.filter(e => e.tipo === currentFilter);
+
+            if (filteredEvents.length === 0) {
+                eventsContainer.innerHTML = `
+                    <div class="no-events" style="grid-column: 1/-1;">
+                        <h2>⏳ No hay eventos</h2>
+                    </div>
+                `;
+                return;
+            }
+
+            eventsContainer.innerHTML = filteredEvents.map((evento, index) => `
+                <div class="event-card ${evento.tipo}">
+                    <div class="event-header">
+                        <div>
+                            <div class="event-type">${evento.tipo}</div>
+                            <div class="event-id">ID: ${evento.id}</div>
+                        </div>
+                        <div class="operation-badge ${evento.operacion}">
+                            ${evento.operacion}
+                        </div>
+                    </div>
+                    
+                    ${evento.datos ? `
+                        <div class="event-data">
+                            <pre>${JSON.stringify(evento.datos, null, 2)}</pre>
+                        </div>
+                    ` : '<div class="event-data"><em>Sin datos</em></div>'}
+                    
+                    <div class="event-timestamp">
+                        ${new Date(evento.timestamp).toLocaleString('es-ES')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Actualizar estadísticas
+        function updateStats() {
+            totalEventsElement.textContent = events.length;
+            createCountElement.textContent = events.filter(e => e.operacion === 'CREATE').length;
+            updateCountElement.textContent = events.filter(e => e.operacion === 'UPDATE').length;
+            deleteCountElement.textContent = events.filter(e => e.operacion === 'DELETE').length;
+        }
+
+        // Filtros
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderEvents();
+            });
+        });
+    </script>
+</body>
+
+</html>

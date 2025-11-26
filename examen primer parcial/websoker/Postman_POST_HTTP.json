@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "webhook-http-post",
+    "name": "WebSocket Webhook - HTTP POST",
+    "description": "Peticiones HTTP POST al WebSocket (NO WebSocket, es HTTP normal)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST Webhook - Evento CREATE",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"nombre\": \"Concierto Metallica\",\n    \"artista\": \"Metallica\",\n    \"fecha\": \"2025-12-15\",\n    \"hora\": \"20:00\",\n    \"precioBase\": 150,\n    \"capacidadTotal\": 5000\n  },\n  \"timestamp\": \"2025-11-25T10:30:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/webhook/evento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "webhook",
+            "evento"
+          ]
+        },
+        "description": "Envía un evento CREATE al WebSocket. Abre el navegador en http://localhost:3001 y verás el evento en tiempo real"
+      },
+      "response": []
+    },
+    {
+      "name": "POST Webhook - Ubicación CREATE",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"ubicacion-456\",\n  \"tipo\": \"ubicaciones\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"nombre\": \"Estadio Nacional\",\n    \"ciudad\": \"Santiago\",\n    \"pais\": \"Chile\",\n    \"capacidad\": 40000,\n    \"direccion\": \"Calle Principal 123\"\n  },\n  \"timestamp\": \"2025-11-25T10:35:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/webhook/evento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "webhook",
+            "evento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Webhook - Asiento CREATE",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"asiento-789\",\n  \"tipo\": \"asientos\",\n  \"operacion\": \"CREATE\",\n  \"datos\": {\n    \"fila\": \"A\",\n    \"numero\": 1,\n    \"precio\": 50,\n    \"eventoId\": \"evento-123\"\n  },\n  \"timestamp\": \"2025-11-25T10:40:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/webhook/evento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "webhook",
+            "evento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Webhook - UPDATE Evento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"UPDATE\",\n  \"datos\": {\n    \"nombre\": \"Concierto Metallica - ACTUALIZADO\",\n    \"artista\": \"Metallica\",\n    \"fecha\": \"2025-12-20\",\n    \"hora\": \"21:00\",\n    \"precioBase\": 200\n  },\n  \"timestamp\": \"2025-11-25T10:55:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/webhook/evento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "webhook",
+            "evento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Webhook - DELETE Evento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"evento-123\",\n  \"tipo\": \"eventos\",\n  \"operacion\": \"DELETE\",\n  \"datos\": null,\n  \"timestamp\": \"2025-11-25T11:00:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/webhook/evento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "webhook",
+            "evento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET - Ver eventos recibidos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/events/log",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "events",
+            "log"
+          ]
+        },
+        "description": "Muestra todos los eventos que el WebSocket ha recibido"
+      },
+      "response": []
+    },
+    {
+      "name": "GET - Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Verifica que el servidor WebSocket está corriendo"
+      },
+      "response": []
+    }
+  ]
+}
